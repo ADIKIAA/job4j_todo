@@ -15,7 +15,7 @@ public class SimpleUserService implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public Optional<User> save(User user) {
+    public User save(User user) {
         return userRepository.save(user);
     }
 
@@ -40,8 +40,8 @@ public class SimpleUserService implements UserService {
     }
 
     @Override
-    public boolean update(User user) {
-        return userRepository.update(user);
+    public boolean update(int id, User user) {
+        return userRepository.update(id, user);
     }
 
 }
