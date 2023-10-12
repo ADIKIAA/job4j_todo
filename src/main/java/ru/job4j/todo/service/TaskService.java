@@ -13,12 +13,12 @@ public interface TaskService {
 
     boolean update(int id, Task task);
 
+    boolean done(int id);
+
     Optional<Task> findById(int id);
 
     Collection<Task> findAll();
 
-    Collection<Task> findNew();
-
-    Collection<Task> findDone();
+    Collection<Task> findByBoolean(boolean done);
 
 }

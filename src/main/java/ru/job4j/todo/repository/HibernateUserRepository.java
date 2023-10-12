@@ -1,12 +1,14 @@
 package ru.job4j.todo.repository;
 
 import lombok.AllArgsConstructor;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import ru.job4j.todo.model.User;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 @Repository
 @AllArgsConstructor
@@ -16,7 +18,7 @@ public class HibernateUserRepository implements UserRepository {
 
     @Override
     public User save(User user) {
-        crudRepository.run(session -> session.persist(user));
+        crudRepository.run((Consumer<Session>) session -> session.persist(user));
         return user;
     }
 

@@ -25,6 +25,10 @@ public class CrudRepository {
         });
     }
 
+    public <T> T run(Function<Session, T> command) {
+        return tx(command);
+    }
+
     public <T> int execute(String query, Map<String, Object> args) {
         Function<Session, Integer> command = session -> {
             var sq = session.createQuery(query);

@@ -24,13 +24,13 @@ public class TaskController {
 
     @GetMapping("/onlyNew")
     public String getNew(Model model) {
-        model.addAttribute("tasks", taskService.findNew());
+        model.addAttribute("tasks", taskService.findByBoolean(false));
         return "tasks/list";
     }
 
     @GetMapping("/onlyDone")
     public String getDone(Model model) {
-        model.addAttribute("tasks", taskService.findDone());
+        model.addAttribute("tasks", taskService.findByBoolean(true));
         return "tasks/list";
     }
 
@@ -49,33 +49,52 @@ public class TaskController {
     @GetMapping("/{id}")
     public String getById(Model model, @PathVariable int id) {
         Optional<Task> taskOptional = taskService.findById(id);
+        if (taskOptional.isEmpty()) {
+            model.addAttribute("message", "Задание с указанным идентификатором не найдена");
+            return "errors/404";
+        }
         model.addAttribute("task", taskOptional.get());
         return "tasks/one";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(Model model, @PathVariable int id) {
-        var rsl = taskService.delete(id);
+        boolean rsl = taskService.delete(id);
+        if (!rsl) {
+            model.addAttribute("message", "Ошибка удаления");
+            return "errors/404";
+        }
         return "redirect:/tasks";
     }
 
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable int id) {
-        model.addAttribute("task", taskService.findById(id).get());
+        Optional<Task> taskOptional = taskService.findById(id);
+        if (taskOptional.isEmpty()) {
+            model.addAttribute("message", "Задание с указанным идентификатором не найдена");
+            return "errors/404";
+        }
+        model.addAttribute("task", taskOptional.get());
         return "tasks/edit";
     }
 
     @PostMapping("/update")
     public String update(Model model, @ModelAttribute Task task) {
-        taskService.update(task.getId(), task);
+        boolean rsl = taskService.update(task.getId(), task);
+        if (!rsl) {
+            model.addAttribute("message", "Ошибка обновления");
+            return "errors/404";
+        }
         return "redirect:/tasks/one";
     }
 
     @GetMapping("/done/{id}")
     public String done(Model model, @PathVariable int id) {
-        var task = taskService.findById(id).get();
-        task.setDone(true);
-        taskService.update(id, task);
+        boolean rsl = taskService.done(id);
+        if (!rsl) {
+            model.addAttribute("message", "Ошибка обновления");
+            return "errors/404";
+        }
         return "redirect:/tasks/one";
     }
 

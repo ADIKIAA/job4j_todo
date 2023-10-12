@@ -30,6 +30,11 @@ public class SimpleTaskService implements TaskService {
     }
 
     @Override
+    public boolean done(int id) {
+        return taskRepository.done(id);
+    }
+
+    @Override
     public Optional<Task> findById(int id) {
         return taskRepository.findById(id);
     }
@@ -40,13 +45,8 @@ public class SimpleTaskService implements TaskService {
     }
 
     @Override
-    public Collection<Task> findNew() {
-        return taskRepository.findNew();
-    }
-
-    @Override
-    public Collection<Task> findDone() {
-        return taskRepository.findDone();
+    public Collection<Task> findByBoolean(boolean done) {
+        return taskRepository.findByBoolean(done);
     }
 
 }
