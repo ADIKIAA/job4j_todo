@@ -5,7 +5,6 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import ru.job4j.todo.model.User;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -17,14 +16,13 @@ public class HibernateUserRepository implements UserRepository {
     private final CrudRepository crudRepository;
 
     @Override
-    public User save(User user) {
-        crudRepository.run((Consumer<Session>) session -> session.persist(user));
-        return user;
-    }
-
-    @Override
-    public Collection<User> findAll() {
-        return crudRepository.query("from User", User.class);
+    public Optional<User> save(User user) {
+        try {
+            crudRepository.run((Consumer<Session>) session -> session.persist(user));
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+        return Optional.of(user);
     }
 
     @Override

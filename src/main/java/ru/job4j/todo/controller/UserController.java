@@ -30,7 +30,7 @@ public class UserController {
         var userOptional = userService.findByEmailAndPassword(user.getLogin(), user.getPassword());
         if (userOptional.isEmpty()) {
             model.addAttribute("error", "Почта или пароль введены неверно");
-            return "user/login";
+            return "users/login";
         }
         var session = request.getSession();
         session.setAttribute("user", userOptional.get());
@@ -42,12 +42,12 @@ public class UserController {
         return "users/register";
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public String register(Model model, @ModelAttribute User user) {
         var saveUser = userService.save(user);
-        if (user == null) {
+        if (saveUser.isEmpty()) {
             model.addAttribute("message", "Пользователь с такой почтой уже существует");
-            return "errors/404";
+            return "users/register";
         }
         return "redirect:/tasks";
     }

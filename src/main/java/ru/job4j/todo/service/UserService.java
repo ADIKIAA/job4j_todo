@@ -7,9 +7,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    User save(User user);
-
-    Collection<User> findAll();
+    Optional<User> save(User user);
 
     Optional<User> findById(int id);
 
