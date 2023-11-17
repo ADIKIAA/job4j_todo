@@ -21,7 +21,6 @@ public class TaskController {
 
     private final PriorityService priorityService;
 
-
     @GetMapping
     public String getAll(Model model) {
         model.addAttribute("tasks", taskService.findAll());
