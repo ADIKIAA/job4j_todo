@@ -40,6 +40,12 @@
                 <label for="description" class="form-label"><b>Дата создания</b></label>
                 <text th:text="${task.created}"></text>
             </div>
+            <div class="mb-3">
+                <label for="priority"><b>Приоритет</b></label>
+                <select class="form-control" id="priority" name="priorityId">
+                    <option th:each="priority : ${priorities}" th:value="${priority.id}" th:text="${city.name}" th:field="*{priorityId}" th:selected="${priority.id==priorityId}"></option>
+                </select>
+            </div>
             <div class="mb-3 row">
                 <div class="col-6">
                     <div class="row">

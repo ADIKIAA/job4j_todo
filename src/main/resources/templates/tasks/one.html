@@ -40,6 +40,10 @@
                 <h5>Дата создания</h5>
                 <data th:text="${task.created}"></data>
             </div>
+            <div class="col-6">
+                <h5>Приоритет</h5>
+                <data th:text="${task.priority.name}"></data>
+            </div>
             <div class="mb-3 row">
                 <div class="col-6">
                     <div class="row">
