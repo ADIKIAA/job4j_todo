@@ -20,6 +20,7 @@ public class HibernateUserRepository implements UserRepository {
         Optional<User> rsl = Optional.empty();
         try {
             crudRepository.run((Consumer<Session>) session -> session.persist(user));
+            rsl = Optional.of(user);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -45,7 +45,6 @@ public class TaskController {
     @PostMapping("/create")
     public String create(@ModelAttribute Task task, HttpServletRequest request, HttpSession session) {
         task.setDone(false);
-        task.setUser((User) request.getUserPrincipal());
         taskService.save(task);
         return "redirect:/tasks";
     }
