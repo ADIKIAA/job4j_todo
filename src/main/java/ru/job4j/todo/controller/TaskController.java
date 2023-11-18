@@ -10,9 +10,6 @@ import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.PriorityService;
 import ru.job4j.todo.service.TaskService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Controller
