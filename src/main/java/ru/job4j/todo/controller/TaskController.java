@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.job4j.todo.model.Priority;
 import ru.job4j.todo.model.Task;
+import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.PriorityService;
 import ru.job4j.todo.service.TaskService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Controller
@@ -46,8 +49,16 @@ public class TaskController {
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute Task task, HttpServletRequest request, HttpSession session) {
+    public String create(@RequestParam String title, @RequestParam String description,
+                         @SessionAttribute User user,
+                         @RequestParam int priorityId) {
+        Task task = new Task();
+        task.setTitle(title);
+        task.setDescription(description);
         task.setDone(false);
+        task.setUser(user);
+        Priority priority = priorityService.findById(priorityId).get();
+        task.setPriority(priority);
         taskService.save(task);
         return "redirect:/tasks";
     }

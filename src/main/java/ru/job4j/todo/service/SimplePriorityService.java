@@ -6,6 +6,7 @@ import ru.job4j.todo.model.Priority;
 import ru.job4j.todo.repository.PriorityRepository;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -16,6 +17,11 @@ public class SimplePriorityService implements PriorityService {
     @Override
     public Collection<Priority> findAll() {
         return priorityRepository.findAll();
+    }
+
+    @Override
+    public Optional<Priority> findById(int id) {
+        return priorityRepository.findById(id);
     }
 
 }
