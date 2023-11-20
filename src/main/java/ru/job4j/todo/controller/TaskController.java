@@ -46,12 +46,9 @@ public class TaskController {
     }
 
     @PostMapping("/create")
-    public String create(@RequestParam String title, @RequestParam String description,
+    public String create(@ModelAttribute Task task,
                          @SessionAttribute User user,
                          @RequestParam int priorityId) {
-        Task task = new Task();
-        task.setTitle(title);
-        task.setDescription(description);
         task.setDone(false);
         task.setUser(user);
         Priority priority = priorityService.findById(priorityId).get();
