@@ -47,12 +47,8 @@ public class TaskController {
 
     @PostMapping("/create")
     public String create(@ModelAttribute Task task,
-                         @SessionAttribute User user,
-                         @RequestParam int priorityId) {
-        task.setDone(false);
+                         @SessionAttribute User user) {
         task.setUser(user);
-        Priority priority = priorityService.findById(priorityId).get();
-        task.setPriority(priority);
         taskService.save(task);
         return "redirect:/tasks";
     }
