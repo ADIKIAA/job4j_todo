@@ -27,6 +27,7 @@
                 <thead>
                 <tr>
                     <th scope="col">Название</th>
+                    <th scope="col">Категория</th>
                     <th scope="col">Опиание</th>
                     <th scope="col">Пользователь</th>
                     <th scope="col">Дата создания</th>
@@ -37,6 +38,11 @@
                 <tbody>
                 <tr th:each="task: ${tasks}">
                     <td><a th:text="${task.title}" th:href="@{/tasks/{taskId}(taskId=${task.id})}"></a></td>
+                    <td>
+                            <li th:each="category : ${task.categories}">
+                                <span th:text="${category.name}"/>
+                            </li>
+                    </td>
                     <td th:text="${task.description}"/>
                     <td th:text="${task.user.name}"/>
                     <td th:text="${task.created}"/>

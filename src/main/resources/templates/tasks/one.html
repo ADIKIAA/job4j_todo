@@ -28,6 +28,12 @@
                 <h5>Название</h5>
                 <text th:text="${task.title}"></text>
             </div>
+            <div class="form-group">
+                <h5>Категория</h5>
+                <li th:each="category : ${task.categories}">
+                    <span th:text="${category.name}"/>
+                </li>
+            </div>
             <div class="col-6">
                 <h5>Описание</h5>
                 <textarea th:text="${task.description}" rows="10" ></textarea>
