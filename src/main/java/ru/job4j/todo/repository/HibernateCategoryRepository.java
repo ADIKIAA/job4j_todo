@@ -5,9 +5,8 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.todo.model.Category;
 import ru.job4j.todo.model.Task;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
@@ -24,11 +23,11 @@ public class HibernateCategoryRepository implements CategoryRepository {
     }
 
     @Override
-    public Optional<Category> findById(int id) {
-        return crudRepository.optional(
-                "from Category WHERE id = :id",
+    public Set<Category> findByIds(Set<Integer> ids) {
+        return new HashSet<>(crudRepository.query(
+                "from Category WHERE id in :ids",
                 Category.class,
-                Map.of("id", id));
+                Map.of("ids", ids)));
     }
 
 }

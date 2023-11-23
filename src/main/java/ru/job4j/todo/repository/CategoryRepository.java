@@ -4,11 +4,12 @@ import ru.job4j.todo.model.Category;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 
 public interface CategoryRepository {
 
     Collection<Category> findAll();
 
-    Optional<Category> findById(int id);
+    Set<Category> findByIds(Set<Integer> ids);
 
 }

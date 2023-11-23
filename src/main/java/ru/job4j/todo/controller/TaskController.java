@@ -13,6 +13,7 @@ import ru.job4j.todo.service.PriorityService;
 import ru.job4j.todo.service.TaskService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -59,9 +60,7 @@ public class TaskController {
                          @RequestParam(required = false) Set<Integer> cIds) {
         task.setUser(user);
         if (!cIds.isEmpty()) {
-            for (Integer id : cIds) {
-                task.getCategories().add(categoryService.findById(id).get());
-            }
+            task.setCategories(categoryService.findByIds(cIds));
         }
         taskService.save(task);
         return "redirect:/tasks";
@@ -108,9 +107,7 @@ public class TaskController {
                          @RequestParam(required = false) Set<Integer> cIds) {
         task.setUser(user);
         if (!cIds.isEmpty()) {
-            for (Integer id : cIds) {
-                task.getCategories().add(categoryService.findById(id).get());
-            }
+           task.setCategories(categoryService.findByIds(cIds));
         }
         boolean rsl = taskService.update(task.getId(), task);
         if (!rsl) {
