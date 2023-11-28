@@ -12,6 +12,8 @@ import ru.job4j.todo.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.TimeZone;
 
 @Controller
 @RequestMapping("/users")
@@ -38,7 +40,12 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String getRegisterPage() {
+    public String getRegisterPage(Model model) {
+        var zones = new ArrayList<TimeZone>();
+        for (String timeId : TimeZone.getAvailableIDs()) {
+            zones.add(TimeZone.getTimeZone(timeId));
+        }
+        model.addAttribute("zones", zones);
         return "users/register";
     }
 

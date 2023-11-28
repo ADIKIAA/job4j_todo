@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +24,7 @@ public class Task {
 
     private String description;
 
-    private final LocalDateTime created = LocalDateTime.now();
+    private final LocalDateTime created = LocalDateTime.now(ZoneId.of("UTC"));
 
     private boolean done;
 
