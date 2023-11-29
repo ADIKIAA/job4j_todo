@@ -24,7 +24,7 @@ public class Task {
 
     private String description;
 
-    private final LocalDateTime created = LocalDateTime.now(ZoneId.of("UTC"));
+    private LocalDateTime created = LocalDateTime.now(ZoneId.of("UTC"));
 
     private boolean done;
 
