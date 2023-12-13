@@ -19,9 +19,9 @@
     <title>Создание задания</title>
 </head>
 <body>
-<div class="container-fluid p-0">
-    <header th:insert="blocks/header :: header"></header>
-    <div class="container">
+<header th:insert="blocks/header :: header"></header>
+<div  class="container" >
+    <div class="container " style="width: 60%">
         <form class="mt-3" th:action="@{/tasks/create}" method="post">
             <h2><b>Создание нового задания</b></h2>
             <div class="mb-3">
@@ -51,8 +51,8 @@
                 <div class="col-6"></div>
                 <div class="col-6">
                     <div class="row">
-                        <div class="col-6"><a class="btn btn-danger w-100" th:href="@{/tasks}">Отмена</a></div>
-                        <div class="col-6"><button class="btn btn-primary w-100" type="submit">Добавить</button>
+                        <div class="col-6"><a class="btn btn-outline-danger w-100" th:href="@{/tasks}">Отмена</a></div>
+                        <div class="col-6"><button class="btn btn-outline-primary w-100" type="submit">Добавить</button>
                         </div>
                     </div>
                 </div>

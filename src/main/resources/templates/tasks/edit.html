@@ -18,9 +18,9 @@
     <title>Редактирование задания</title>
 </head>
 <body>
-<div class="container-fluid p-0">
-    <header th:insert="blocks/header :: header"></header>
-    <div class="container">
+<header th:insert="blocks/header :: header"></header>
+<div class="container">
+    <div class="container " style="width: 60%">
         <form class="mt-3" th:action="@{/tasks/update}" method="post" th:object="${task}" >
             <input type="hidden" name="id" th:field="*{id}">
             <h2><b>Редактирование задания</b></h2>
@@ -41,12 +41,14 @@
                 <textarea class="form-control" id="description" name="description" th:field="*{description}" rows="10" placeholder="Описание задания"></textarea>
             </div>
             <div class="col-6">
-                <label for="description" class="form-label"><b>Статус</b></label>
-                <text th:text="${task.done} ? 'Выполнено' : 'Новое'"></text>
+                <h6 for="description" class="form-label"><b>Статус</b></h6>
+                <p th:text="${task.done} ? 'Выполнено' : 'Новое'"></p>
+                <br>
             </div>
             <div class="col-6">
-                <label for="description" class="form-label"><b>Дата создания</b></label>
-                <text th:text="${task.created}"></text>
+                <h6 for="description" class="form-label"><b>Дата создания</b></h6>
+                <p th:text="${#temporals.format(task.created, 'dd.MM.yyyy HH:mm')}"></p>
+                <br>
             </div>
             <div class="mb-3">
                 <label for="priority"><b>Приоритет</b></label>
@@ -61,8 +63,8 @@
             <div class="mb-3 row">
                 <div class="col-6">
                     <div class="row">
-                        <div class="col-4"><a class="btn btn-danger w-100" th:href="@{/tasks/{taskId}(taskId=${task.id})}">Отмена</a></div>
-                        <div class="col-4"><button class="btn btn-light w-100" type="submit">Сохранить</button></div>
+                        <div class="col-6"><a class="btn btn-outline-danger w-100" th:href="@{/tasks/{taskId}(taskId=${task.id})}">Отмена</a></div>
+                        <div class="col-6"><button class="btn btn-outline-success w-100" type="submit">Сохранить</button></div>
                     </div>
                 </div>
             </div>
